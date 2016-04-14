@@ -167,6 +167,14 @@ properties:
 <a id="operating"></a>
 ## Operating
 
+<a id="manual-backups"></a>
+### Manual backups
+
+By default, triggering the backups will be controlled by the cron schedule. However, also provided in the service backup release is an executable that can be used to trigger a backup manually.
+
+This can be run via sshing onto the service-backup VM and executing the `/var/vcap/packages/service-backup/bin/manual-backup` tool. This will immediately create a backup.
+
+
 <a id="locating-the-backups"></a>
 ### Locating the backups
 
