@@ -203,6 +203,27 @@ The `s3:CreateBucket` permission is required because the tool will attempt to cr
 
 Finally, attach this policy to your AWS user (IAM > Policies > Policy Actions > Attach).
 
+##### <a id="s3"></a>AWS CLI version
+
+We package the AWS CLI in order to upload the backups. Currently, we use version `1.10.47`.
+
+The AWS CLI packages the following dependencies, at the version specified:
+
+* `argparse-1.2.1`
+* `botocore-1.4.37`
+* `colorama-0.3.7`
+* `docutils-0.12`
+* `futures-3.0.5`
+* `jmespath-0.9.0`
+* `ordereddict-1.1`
+* `pyasn1-0.1.9`
+* `python-dateutil-2.5.3`
+* `rsa-3.4.2`
+* `s3transfer-0.0.1`
+* `simplejson-3.3.0`
+* `six-1.10.0`
+* `virtualenv-13.0.3`
+
 ##### S3-compatible blobstores
 
 By default, backups are sent to AWS S3. To use an S3-compatible blobstore like RiakS2, set the `endpoint_url` property.
@@ -225,6 +246,18 @@ properties:
 ```
 
 By default, backups are sent to the public Azure blobstore. To use an on-premise blobstore, set the `blob_store_base_url` property.
+
+##### <a id="azure"></a>Azure version
+
+The following packages at the specified versions are required to use the Azure CLI to upload the backups.
+
+* `python-dateutil-2.4.2`
+* `setuptools-20.6.7`
+* `azure-common-1.1.4`
+* `azure-storage-0.32.0`
+* `blobxfer-0.11.1`
+* `requests-2.10.0`
+* `six-1.10.0`
 
 #### <a id="gcs"></a>Google Cloud Storage
 
@@ -251,6 +284,10 @@ Storage class: Standard. See [storage classes documentation](https://cloud.googl
 
 If you create the bucket in advance, then you must ensure that the service account has access to write it. "Storage Admin" IAM permission should ensure this.
 
+##### <a id="gcs"></a>Google Cloud Storage version
+
+We use the Google GCS storage golang package from `cloud.google.com/go/storage` from [here](https://code.googlesource.com/gocloud) to upload the backups.
+
 #### <a id="scp"></a>SCP
 
 ```yml
@@ -272,6 +309,9 @@ properties:
 ```
 
 The `fingerprint` field expects the entire output in the format returned by the `ssh-keyscan` utility for the host. If the fingerprint is provided and doesn't match, then the backup will fail. If it's empty then the fingerprint of the host will be requested right before the upload and this would be used instead. A fingerprint should be configured to prevent server spoofing or man-in-the-middle attacks. For more information refer: http://man.openbsd.org/ssh#authentication
+
+##### <a id="scp"></a>SCP version
+Whatevers on the stemcell.
 
 #### <a id="multiple-destinations"></a>Multiple destinations
 
@@ -302,6 +342,11 @@ properties:
 The tool can be provided with configuration for multiple destinations in the `destinations` property. The tool will upload backups to all the provided destinations sequentially.
 
 You can configure multiple destinations of the same type, for example: two S3 buckets in different regions.
+
+
+
+
+
 
 ## <a id="operating"></a>Operating
 
